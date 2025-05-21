@@ -16,13 +16,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@types/*": ["src/@types/*"],
-      "@types": ["src/@types"]
+      "@types": ["src/@types"],
+      "@constants/*": ["src/constants/*"],
     },
-    "typeRoots": ["./node_modules/@types/", "./src/@types/"]
+    "typeRoots": ["./node_modules/@types/", "./src/@types/"],
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
 }
