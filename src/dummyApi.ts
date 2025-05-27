@@ -51,8 +51,10 @@ export const fetchDummyPlaces = async (): Promise<Place[]> => {
       shop_map_S3: "",
       tag: ["커피", "디저트", "미팅"],
       type: Category.Cafe,
-      naver_link: "#",
-      kakao_link: "#",
+      naver_link:
+        "https://map.naver.com/p/entry/place/1141004997?placePath=%2Fhome",
+      kakao_link:
+        "https://map.naver.com/p/entry/place/1141004997?placePath=%2Fhome",
     },
     {
       pK: 2,
@@ -100,8 +102,10 @@ export const fetchDummyPlaces = async (): Promise<Place[]> => {
       shop_map_S3: "",
       tag: ["스테이크", "샐러드바", "가족외식"],
       type: Category.Meal,
-      naver_link: "#",
-      kakao_link: "#",
+      naver_link:
+        "https://map.naver.com/p/entry/place/1141004997?placePath=%2Fhome",
+      kakao_link:
+        "https://map.naver.com/p/entry/place/1141004997?placePath=%2Fhome",
     },
     {
       pK: 3,
@@ -149,8 +153,10 @@ export const fetchDummyPlaces = async (): Promise<Place[]> => {
       shop_map_S3: "",
       tag: ["위스키", "칵테일", "분위기"],
       type: Category.Drinks,
-      naver_link: "#",
-      kakao_link: "#",
+      naver_link:
+        "https://map.naver.com/p/entry/place/1141004997?placePath=%2Fhome",
+      kakao_link:
+        "https://map.naver.com/p/entry/place/1141004997?placePath=%2Fhome",
     },
   ];
 };
