@@ -123,7 +123,6 @@ const CategoryButton = styled.button<CategoryButtonProps>`
   }
 
   &:hover {
-    outline: none;
     border: 0.06rem solid ${(props) => (props.isSelect ? "#ff7b23" : "#1f2937")};
   }
 `;
@@ -151,10 +150,11 @@ const Button = styled.button`
 
   &:focus {
     outline: none;
+    border: 0.06rem solid #1f2937;
   }
 
   &:hover {
     outline: none;
-    border: 0.06rem solid #ff7b23;
+    border: 0.06rem solid #1f2937;
   }
 `;
