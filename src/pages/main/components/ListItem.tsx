@@ -186,6 +186,7 @@ const ListCard = styled.div`
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 const ImageWrapper = styled.div`
@@ -266,16 +267,6 @@ const Hashtag = styled.span`
 
   font-size: 12px;
   font-weight: 400;
-
-  cursor: pointer;
-
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-1px);
-    background-color: #ffa774;
-    color: #ffffff;
-  }
 `;
 
 export default ListItem;
