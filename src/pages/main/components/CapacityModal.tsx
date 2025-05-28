@@ -28,11 +28,7 @@ function CapacityModal({ isOpen, onClose, onApply }: CapacityModalProps) {
 
   return (
     <ModalOverlay onClick={handleClose}>
-      {" "}
-      {/* Clicking overlay closes modal */}
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        {" "}
-        {/* Prevents closing when clicking inside content */}
         <h3>인원 수 필터</h3>
         <ModalInput
           type="number"
@@ -67,42 +63,60 @@ const ModalOverlay = styled.div`
 
 const ModalContent = styled.div`
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.1rem 0.7rem rgba(0, 0, 0, 0.1);
+  width: 16rem;
+
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1.5rem;
+
+  > h3 {
+    margin: 0;
+    margin-top: 0.5rem;
+  }
 `;
 
 const ModalInput = styled.input`
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
+  border-radius: 1.4rem;
+  height: 2.8rem;
+  width: 100%;
+  padding-left: 1rem;
+  box-sizing: border-box;
+
+  border: 0.06rem solid #ccc;
+  background-color: white;
+
+  font-size: 0.9rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    outline: none;
+  }
 `;
 
 const ModalButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 0.6rem;
 `;
 
 const ModalButton = styled.button`
-  padding: 8px 15px;
-  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
   border: none;
   cursor: pointer;
   font-weight: 500;
 
   &:first-child {
-    // Assuming Apply button is first
-    background-color: #007bff; // Example primary color
+    background-color: #ff7b23;
     color: white;
   }
   &:last-child {
-    // Assuming Close/Cancel button is second
-    background-color: #f0f0f0;
+    background-color: #e9e9e9;
   }
 `;

@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Place } from "src/@types/index";
+import backarrow from "src/assets/backarrow.svg";
 import { styled } from "styled-components";
 
 import ListItem from "./main/components/ListItem";
@@ -29,24 +30,7 @@ function Detail() {
     <div>
       <Header>
         <BackButton onClick={handleGoBack}>
-          <svg
-            viewBox="0 0 50 50"
-            fill="none"
-            style={{
-              marginTop: "12px",
-              width: "50px",
-              height: "40px",
-              boxSizing: "border-box",
-            }}
-          >
-            <path
-              d="M25 30L13 20L25 10"
-              stroke="#000000"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <img src={backarrow} />
         </BackButton>
       </Header>
       <CardWrapper>
@@ -108,64 +92,70 @@ function Detail() {
 export default Detail;
 
 const Header = styled.div`
-  padding: 8px;
+  padding: 0.3rem;
+  width: 100%;
+  display: inline-flex;
+  box-sizing: border-box;
 `;
 
 const BackButton = styled.div`
-  width: 40px;
-  height: 40px;
-  top: 16px;
-  left: 16px;
-  border-radius: 20px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
+  padding: 0.7rem;
+  display: inline-flex;
   align-items: center;
+  height: 2.9rem;
+  width: 2.9rem;
+  box-sizing: border-box;
   cursor: pointer;
+  > img {
+    height: 1.7rem;
+  }
 `;
 
 const CardWrapper = styled.div`
-  padding: 0 16px;
-  margin: 0 0 4px 0;
+  margin: 0 1rem;
 `;
 
 const DetailWrapper = styled.div`
+  padding: 0 1rem 1rem 1rem;
+  margin: 1rem 1rem;
+
   background-color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
   box-sizing: border-box;
-  padding: 8px 16px;
+
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
-  margin: 16px 16px;
 `;
 
 const Section = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
 `;
 
-const SectionTitle = styled.p`
-  display: flex;
-  align-items: baseline;
-  margin: 6px 0;
-  padding: 4px 0;
-  font-size: 18px;
+const SectionTitle = styled.div`
+  display: inline-flex;
+
+  font-size: 1.1rem;
+  line-height: 2rem;
+  height: 2rem;
+
   font-weight: 600;
   color: #ff7b23;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 0.06rem solid #ddd;
+
+  cursor: default;
 `;
 
 const SectionItem = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  padding: 4px 0;
+  display: inline-flex;
+  cursor: default;
 `;
 
 const Label = styled.span`
   font-weight: 600;
+  line-height: 2rem;
 `;
 
 const Value = styled.span`
@@ -174,14 +164,14 @@ const Value = styled.span`
 
 const LinkButton = styled.a`
   width: 100%;
-  height: 48px;
+  height: 2.9rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #ff7b23;
   color: white;
-  border-radius: 12px;
-  margin: 6px 0;
+  border-radius: 0.45rem;
+  margin: 0.5rem 0 0 0;
   text-decoration: none;
 `;
 

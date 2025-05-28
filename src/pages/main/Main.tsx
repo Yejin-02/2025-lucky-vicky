@@ -32,8 +32,10 @@ function Main() {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
   return (
-    <div>
-      <Header onClick={handleHeaderClick}>EatG</Header>
+    <Wrapper>
+      <Header>
+        <span onClick={handleHeaderClick}>EatG</span>
+      </Header>
       <FilterControls
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -52,17 +54,26 @@ function Main() {
           handleCloseModal(); // 모달 닫기는 여기서 명시적으로 호출
         }}
       />
-    </div>
+    </Wrapper>
   );
 }
 
 export default Main;
 
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
 const Header = styled.div`
   background-color: #ff7b23;
-  text-align: center;
   color: white;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-weight: 600;
-  line-height: 2;
+  line-height: 3rem;
+  height: 3rem;
+  > span {
+    cursor: pointer;
+  }
 `;

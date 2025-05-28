@@ -61,20 +61,20 @@ function FilterControls({
 export default FilterControls;
 
 const SearchWrapper = styled.div`
-  padding: 16px;
+  padding: 1rem;
   width: 100%;
   box-sizing: border-box;
 `;
 
 const Search = styled.input`
-  border-radius: 24px;
-  height: 48px;
+  border-radius: 1.5rem;
+  height: 3rem;
   width: 100%;
-  padding-left: 16px;
+  padding-left: 1rem;
   box-sizing: border-box;
 
-  border: 1px solid #1f2937;
-  background-color: #ffffff;
+  border: 0.06rem solid black;
+  background-color: white;
 
   &:focus {
     outline: none;
@@ -82,12 +82,11 @@ const Search = styled.input`
 
   &:hover {
     outline: none;
-    border: 1px solid #1f2937;
   }
 `;
 
 const FilterWrapper = styled.div`
-  padding: 0 16px 16px 16px;
+  padding: 0 1rem 1rem 1rem;
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -101,15 +100,19 @@ const CategoryWrapper = styled.div`
 interface CategoryButtonProps {
   isSelect: boolean;
 }
-const CategoryButton = styled.button<CategoryButtonProps>`
-  height: 40px;
-  margin-right: 4px;
-  border-radius: 40px;
 
-  font-size: 14px;
+const CategoryButton = styled.button<CategoryButtonProps>`
+  height: 2.5rem;
+  margin-right: 0.25rem;
+  border-radius: 2.5rem;
+  box-sizing: border-box;
+
+  font-size: 0.8rem;
   font-weight: 500;
+
   color: ${(props) => (props.isSelect ? "#ffffff" : "#1f2937")};
-  border: 1px solid ${(props) => (props.isSelect ? "#ff7b23" : "#1f2937")};
+
+  border: 0.06rem solid ${(props) => (props.isSelect ? "#ff7b23" : "#1f2937")};
   background-color: ${(props) => (props.isSelect ? "#ff7b23" : "#ffffff")};
 
   cursor: pointer;
@@ -121,7 +124,7 @@ const CategoryButton = styled.button<CategoryButtonProps>`
 
   &:hover {
     outline: none;
-    border: 1px solid ${(props) => (props.isSelect ? "#ff7b23" : "#1f2937")};
+    border: 0.06rem solid ${(props) => (props.isSelect ? "#ff7b23" : "#1f2937")};
   }
 `;
 
@@ -131,15 +134,20 @@ const ButtonWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  border: 1px solid #1f2937;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: 0.25rem;
+  box-sizing: border-box;
+
+  border-radius: 1.25rem;
+  border: 0.06rem solid #1f2937;
   background-color: #ffffff;
-  margin-left: 4px;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: all 0.17s ease-in-out;
 
   &:focus {
     outline: none;
@@ -147,6 +155,6 @@ const Button = styled.button`
 
   &:hover {
     outline: none;
-    border: 1px solid #1f2937;
+    border: 0.06rem solid #ff7b23;
   }
 `;
