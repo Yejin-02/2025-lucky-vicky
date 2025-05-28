@@ -88,7 +88,7 @@ const ModalInput = styled.input`
   border: 0.06rem solid #ccc;
   background-color: white;
 
-  font-size: 0.9rem;
+  font-size: 1rem;
 
   &:focus {
     outline: none;
