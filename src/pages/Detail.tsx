@@ -27,31 +27,39 @@ function Detail() {
   }
 
   return (
-    <div>
+    <Wrapper>
       <Header>
         <BackButton onClick={handleGoBack}>
           <img src={backarrow} />
         </BackButton>
       </Header>
-      <CardWrapper>
-        <ListItem place={place} />
-      </CardWrapper>
 
-      <DetailWrapper>
-        <Section>
-          <SectionTitle>수용 정보</SectionTitle>
-          <SectionItem>
-            <Label>
-              최대 수용 인원 <Value>{place.max_cap}명</Value>
-            </Label>
-          </SectionItem>
-          <SectionItem>
-            <Label>
-              테이블 당 최대 인원 <Value>{place.table_cap}명</Value>
-            </Label>
-          </SectionItem>
-          {/* 
-          *** 나중에 구현
+      {/* TODO: 이미지 태그 상호명 보여주는 섹션 만들기 */}
+      <Scroller>
+        <DetailWrapper>
+          <Section>
+            <SectionTitle>영업 정보</SectionTitle>
+            {/* TODO: API 나오면 데이터 포맷 맞춰서 이 부분 채우기 */}
+            <SectionItem>
+              <Label>
+                휴무일 <Value>없음</Value>
+              </Label>
+            </SectionItem>
+          </Section>
+          <Section>
+            <SectionTitle>수용 정보</SectionTitle>
+            <SectionItem>
+              <Label>
+                최대 수용 인원 <Value>{place.max_cap}명</Value>
+              </Label>
+            </SectionItem>
+            <SectionItem>
+              <Label>
+                테이블 당 최대 인원 <Value>{place.table_cap}명</Value>
+              </Label>
+            </SectionItem>
+            {/* 
+             TODO 나중에 구현
           <SectionItem>
             <Label>내부 이미지</Label>
             <ImageScroller>
@@ -59,37 +67,46 @@ function Detail() {
             </ImageScroller>
           </SectionItem>
           */}
-        </Section>
-        <Section>
-          <SectionTitle>학교로부터 거리</SectionTitle>
-          <SectionItem>
-            <Label>
-              대중교통 <Value>{place.pubtrans_time}분</Value>
-            </Label>
-          </SectionItem>
-          <SectionItem>
-            <Label>
-              차량 <Value>{place.vehicle_time}분</Value>
-            </Label>
-          </SectionItem>
-          <SectionItem>
-            <Label>
-              도보 <Value>{place.walk_time}분</Value>
-            </Label>
-          </SectionItem>
-          <LinkButton href={place.kakao_link} target="_blank">
-            카카오지도 바로가기
-          </LinkButton>
-          <LinkButton href={place.naver_link} target="_blank">
-            네이버지도 바로가기
-          </LinkButton>
-        </Section>
-      </DetailWrapper>
-    </div>
+          </Section>
+          <Section>
+            <SectionTitle>학교로부터 거리</SectionTitle>
+            <SectionItem>
+              <Label>
+                대중교통 <Value>{place.pubtrans_time}분</Value>
+              </Label>
+            </SectionItem>
+            <SectionItem>
+              <Label>
+                차량 <Value>{place.vehicle_time}분</Value>
+              </Label>
+            </SectionItem>
+            <SectionItem>
+              <Label>
+                도보 <Value>{place.walk_time}분</Value>
+              </Label>
+            </SectionItem>
+            <LinkButton href={place.kakao_link} target="_blank">
+              카카오지도 바로가기
+            </LinkButton>
+            <LinkButton href={place.naver_link} target="_blank">
+              네이버지도 바로가기
+            </LinkButton>
+          </Section>
+        </DetailWrapper>
+      </Scroller>
+    </Wrapper>
   );
 }
 
 export default Detail;
+
+const Wrapper = styled.div`
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
 
 const Header = styled.div`
   padding: 0.3rem;
@@ -111,8 +128,14 @@ const BackButton = styled.div`
   }
 `;
 
-const CardWrapper = styled.div`
-  margin: 0 1rem;
+const Scroller = styled.div`
+  height: 100%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 `;
 
 const DetailWrapper = styled.div`
@@ -175,8 +198,7 @@ const LinkButton = styled.a`
   text-decoration: none;
 `;
 
-{
-  /* 
+/* 
           *** 나중에 구현
 const ImageScroller = styled.div`
   display: flex;
@@ -185,4 +207,3 @@ const ImageScroller = styled.div`
 
 const StyledImage = styled.img``;
 */
-}
