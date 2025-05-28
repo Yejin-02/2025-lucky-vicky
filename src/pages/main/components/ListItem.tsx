@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { DaySchedule, OpeningHours, Place } from "src/@types/index";
+import icon0Url from "src/assets/IconType0.svg";
+import icon1Url from "src/assets/IconType1.svg";
+import icon2Url from "src/assets/IconType2.svg";
 import { styled } from "styled-components";
 
 interface Props {
@@ -122,6 +125,14 @@ function parseOpeningHours(data: OpeningHours): string {
 }
 
 function ListItem({ place }: Props) {
+  const iconMap = {
+    0: icon0Url,
+    1: icon1Url,
+    2: icon2Url,
+  } as const;
+
+  const iconSrc = iconMap[place.type];
+
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -135,9 +146,8 @@ function ListItem({ place }: Props) {
   return (
     <ListCard onClick={handleClick}>
       <ImageWrapper>
-        <CardImage src={place.shop_img_S3}></CardImage>
-        {/* TODO 텍스트를 이미지(카테고리 별 이미지 생성 필요)로 교체 */}
-        <p>{place.type === 0 ? "식당" : place.type === 1 ? "술집" : "카페"}</p>
+        <CardImage src={place.shop_img_S3} />
+        <IconImage src={iconSrc} alt={`Icon ${place.type}`} />
       </ImageWrapper>
       <Wrapper>
         <PlaceName>{place.name}</PlaceName>
@@ -179,20 +189,21 @@ const ListCard = styled.div`
 `;
 
 const ImageWrapper = styled.div`
+  height: 160px;
+  width: 120px;
   position: relative;
-  > p {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    color: #33ff00;
-    font-weight: 700;
-  }
 `;
 
 const CardImage = styled.img`
   height: 160px;
   width: 120px;
   background-color: black;
+`;
+
+const IconImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const Wrapper = styled.div`
