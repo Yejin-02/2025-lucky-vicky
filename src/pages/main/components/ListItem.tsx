@@ -1,3 +1,4 @@
+import React, { useEffect, useRef, useState } from "react"; // useState 추가
 import { useNavigate } from "react-router-dom";
 import { DaySchedule, OpeningHours, Place } from "src/@types/index";
 import icon0Url from "src/assets/IconType0.svg";
@@ -134,6 +135,8 @@ function ListItem({ place }: Props) {
   const iconSrc = iconMap[place.type];
 
   const navigate = useNavigate();
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
 
   const handleClick = () => {
     if (place && place.pK) {
@@ -142,6 +145,24 @@ function ListItem({ place }: Props) {
       console.error("Place ID is missing, cannot navigate.");
     }
   };
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (scrollerRef.current) {
+        const { scrollWidth, clientWidth } = scrollerRef.current;
+        setIsOverflowing(scrollWidth > clientWidth);
+      }
+    };
+
+    checkOverflow();
+
+    // 윈도우 리사이즈 시 오버플로우 재체크
+    // (실제 앱에서는 디바운스/쓰로틀링을 고려하는 것이 좋습니다)
+    window.addEventListener("resize", checkOverflow);
+    return () => {
+      window.removeEventListener("resize", checkOverflow);
+    };
+  }, [place.tag]);
 
   return (
     <ListCard onClick={handleClick}>
@@ -163,13 +184,15 @@ function ListItem({ place }: Props) {
             */}
             <DetailRow>영업 중</DetailRow>
             <DetailRow>휴무일 없음</DetailRow>
-            <DetailRow>최대 인원 {place.max_cap}명</DetailRow>
+            <DetailRow>최대 {place.max_cap}명</DetailRow>
           </DetailCol>
         </DetailWrapper>
         <HashtagWrapper>
-          {place.tag.map((tag, index) => (
-            <Hashtag key={index}>#{tag}</Hashtag>
-          ))}
+          <HashtagListScroller ref={scrollerRef} $isOverflowing={isOverflowing}>
+            {place.tag.map((tag, index) => (
+              <Hashtag key={index}>#{tag}</Hashtag>
+            ))}
+          </HashtagListScroller>
         </HashtagWrapper>
       </Wrapper>
     </ListCard>
@@ -178,27 +201,26 @@ function ListItem({ place }: Props) {
 
 const ListCard = styled.div`
   background-color: #fefefe;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-  height: 160px;
+  box-shadow: 0 0.25rem 0.28rem rgba(0, 0, 0, 0.16);
+  height: 10rem;
   width: 100%;
-  border-radius: 16px;
-  margin-bottom: 16px;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
   display: flex;
-  flex-direction: row;
   overflow: hidden;
   cursor: pointer;
 `;
 
 const ImageWrapper = styled.div`
-  height: 160px;
-  width: 120px;
+  height: 10rem;
+  width: 7.5rem;
   position: relative;
 `;
 
 const CardImage = styled.img`
-  height: 160px;
-  width: 120px;
-  background-color: black;
+  height: 10rem;
+  width: 7.5rem;
+  object-fit: cover;
 `;
 
 const IconImage = styled.img`
@@ -208,17 +230,24 @@ const IconImage = styled.img`
 `;
 
 const Wrapper = styled.div`
-  margin: 10px;
-  width: 100%;
+  margin: 0.65rem;
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 
-const PlaceName = styled.h1`
-  font-size: large;
-  line-height: 0;
+const PlaceName = styled.p`
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1rem;
+  margin: 0;
+
   text-align: left;
-  margin-bottom: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const DetailWrapper = styled.div`
@@ -228,45 +257,61 @@ const DetailWrapper = styled.div`
 `;
 
 const DetailCol = styled.div`
+  width: 50%;
   display: flex;
   flex-direction: column;
-  width: 50%;
-  align-items: baseline;
-  justify-content: baseline;
 `;
 
 const DetailRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: baseline;
-  align-items: center;
-  font-size: 14px;
-  margin: 0;
   width: 100%;
-  height: 26px;
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+  color: #252525;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const HashtagWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
   width: 100%;
-  gap: 8px;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 1rem;
+    height: 100%;
+    background: linear-gradient(to left, #fefefe, rgba(254, 254, 254, 0.1));
+    pointer-events: none;
+  }
 `;
 
-const Hashtag = styled.span`
+const HashtagListScroller = styled.div<{ $isOverflowing: boolean }>`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  gap: 0.5rem;
+  box-sizing: border-box;
 
+  overflow: auto;
+  padding-right: ${({ $isOverflowing }) => ($isOverflowing ? "1rem" : "0")};
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+`;
+
+const Hashtag = styled.div`
   background-color: #ffd0b5;
   color: #ff6b35;
 
-  margin-top: 4px;
-  padding: 0px 8px;
-  border-radius: 6px;
+  padding: 0 0.4rem;
+  border-radius: 0.5rem;
 
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 0.8rem;
+  flex: 0 0 auto;
 `;
 
 export default ListItem;
