@@ -3,8 +3,6 @@ import { Place } from "src/@types/index";
 import backarrow from "src/assets/backarrow.svg";
 import { styled } from "styled-components";
 
-import ListItem from "./main/components/ListItem";
-
 function Detail() {
   const location = useLocation();
   const navigate = useNavigate(); // useNavigate 훅 사용
@@ -33,6 +31,18 @@ function Detail() {
           <img src={backarrow} />
         </BackButton>
       </Header>
+      {/* TODO: 뒷배경 너무 허전하니 적당한 일러스트 작업 후 absolute로 우상단에 보충 */}
+      <BriefingWrapper>
+        <CardImage src={place.shop_img_S3} />
+        <BriefingText>
+          <h1>{place.name}</h1>
+          <HashtagWrapper>
+            {place.tag.map((tag, index) => (
+              <Hashtag key={index}>#{tag}</Hashtag>
+            ))}
+          </HashtagWrapper>
+        </BriefingText>
+      </BriefingWrapper>
 
       {/* TODO: 이미지 태그 상호명 보여주는 섹션 만들기 */}
       <Scroller>
@@ -128,6 +138,52 @@ const BackButton = styled.div`
   }
 `;
 
+const BriefingWrapper = styled.div`
+  display: flex;
+  margin: 0 1rem;
+  gap: 0.5rem;
+`;
+
+const BriefingText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 0.5rem;
+  height: 10rem;
+  > h1 {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    margin: 0;
+    text-align: left;
+  }
+`;
+
+const HashtagWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  overflow: auto;
+`;
+
+const Hashtag = styled.div`
+  background-color: #ffd0b5;
+  color: #ff6b35;
+
+  padding: 0 0.4rem;
+  border-radius: 0.5rem;
+
+  font-size: 0.8rem;
+  flex: 0 0 auto;
+`;
+const CardImage = styled.img`
+  height: 10rem;
+  width: 7.5rem;
+  object-fit: cover;
+  border-radius: 1rem;
+`;
+
 const Scroller = styled.div`
   height: 100%;
   overflow: auto;
@@ -196,6 +252,11 @@ const LinkButton = styled.a`
   border-radius: 0.45rem;
   margin: 0.5rem 0 0 0;
   text-decoration: none;
+  &:hover,
+  &:active,
+  &:visited {
+    color: white;
+  }
 `;
 
 /* 

@@ -49,7 +49,17 @@ export const fetchDummyPlaces = async (): Promise<Place[]> => {
       table_cap: 30,
       table_map_S3: "",
       shop_map_S3: "",
-      tag: ["커피", "디저트", "미팅"],
+      tag: [
+        "커피",
+        "디저트",
+        "미팅",
+        "엣지",
+        "케이스",
+        "테스트",
+        "용",
+        "수많은",
+        "태그",
+      ],
       type: Category.Cafe,
       naver_link:
         "https://map.naver.com/p/entry/place/1141004997?placePath=%2Fhome",
