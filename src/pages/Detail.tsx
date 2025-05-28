@@ -125,7 +125,7 @@ const BackButton = styled.div`
 
 const CardWrapper = styled.div`
   padding: 0 16px;
-  margin: 0 0 20px 0;
+  margin: 0 0 4px 0;
 `;
 
 const DetailWrapper = styled.div`
@@ -137,6 +137,7 @@ const DetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 16px;
+  margin: 16px 16px;
 `;
 
 const Section = styled.div`
