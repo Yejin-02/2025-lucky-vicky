@@ -44,7 +44,6 @@ function Detail() {
         </BriefingText>
       </BriefingWrapper>
 
-      {/* TODO: 이미지 태그 상호명 보여주는 섹션 만들기 */}
       <Scroller>
         <DetailWrapper>
           <Section>
@@ -187,6 +186,7 @@ const CardImage = styled.img`
 const Scroller = styled.div`
   height: 100%;
   overflow: auto;
+  margin: 1rem 1rem 0 1rem;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -196,7 +196,7 @@ const Scroller = styled.div`
 
 const DetailWrapper = styled.div`
   padding: 0 1rem 1rem 1rem;
-  margin: 1rem 1rem;
+  margin-bottom: 1rem;
 
   background-color: white;
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
