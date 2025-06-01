@@ -2,7 +2,7 @@
   height: 100vh;
   height: 100dvh;
   flex-direction: column;
-  justify-self: end;
+  justify-content: end;
   overflow: hidden;
   width: 100%;
   max-width: 440px;
