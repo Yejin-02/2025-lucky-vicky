@@ -115,6 +115,9 @@ const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  overflow: hidden;
 `;
 
 const Header = styled.div`
@@ -185,7 +188,10 @@ const CardImage = styled.img`
 
 const Scroller = styled.div`
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  flex-grow: 1;
+  min-height: 0;
   margin: 1rem 1rem 0 1rem;
   &::-webkit-scrollbar {
     display: none;
