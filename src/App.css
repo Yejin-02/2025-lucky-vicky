@@ -1,11 +1,14 @@
 #root {
   height: 100vh;
   height: 100dvh;
-  flex-direction: column;
-  justify-content: end;
-  overflow: hidden;
+
   width: 100%;
   max-width: 440px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
   margin: 0 auto;
   text-align: center;
   background-color: #fff4e2;
