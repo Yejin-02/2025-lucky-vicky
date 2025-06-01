@@ -64,6 +64,9 @@ const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  overflow: hidden;
 `;
 
 const Header = styled.div`

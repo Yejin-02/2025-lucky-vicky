@@ -36,7 +36,10 @@ const ListWrapper = styled.ul`
   width: 100%;
   box-sizing: border-box;
 
-  overflow: scroll;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  flex-grow: 1;
+  min-height: 0;
 `;
 
 const NoResultsMessage = styled.div`
