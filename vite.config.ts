@@ -15,7 +15,8 @@ export default defineConfig({
     proxy: {
       //CORS 방지를 위한 프록시 설정입니다.
       "/local": {
-        target: "https://your.api.domain.here", //실제 api 도메인을 넣어줍니다.
+        target:
+          "http://ec2-3-39-233-136.ap-northeast-2.compute.amazonaws.com:8000", //실제 api 도메인을 넣어줍니다.
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/local/, ""), //target url을 교체합니다.
       },

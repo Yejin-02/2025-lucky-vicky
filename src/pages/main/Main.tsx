@@ -6,13 +6,13 @@ import CapacityModal from "../main/components/CapacityModal";
 import FilterControls from "../main/components/FilterControls";
 import PlaceList from "../main/components/PlaceList";
 import { usePlaceFilters } from "../main/hooks/usePlaceFilters";
-import { usePlacesData } from "../main/hooks/usePlacesData";
 
 function Main() {
   const navigate = useNavigate();
-  const { places } = usePlacesData();
   const {
     filteredPlaces,
+    isLoading,
+    error,
     searchTerm,
     setSearchTerm,
     selectedCategories,
@@ -20,7 +20,7 @@ function Main() {
     capacityFilter,
     setCapacityFilter,
     resetFilters,
-  } = usePlaceFilters(places);
+  } = usePlaceFilters();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -31,6 +31,7 @@ function Main() {
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
+
   return (
     <Wrapper>
       <Header>
@@ -45,7 +46,13 @@ function Main() {
         handleCategoryToggle={handleCategoryToggle}
         resetFilters={resetFilters}
       />
-      <PlaceList places={filteredPlaces} />
+      {isLoading ? (
+        <NoResultsMessage>로딩 중...</NoResultsMessage>
+      ) : error ? (
+        <NoResultsMessage>{error}</NoResultsMessage>
+      ) : (
+        <PlaceList places={filteredPlaces} />
+      )}
       <CapacityModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
@@ -79,4 +86,10 @@ const Header = styled.div`
   > span {
     cursor: pointer;
   }
+`;
+
+const NoResultsMessage = styled.div`
+  text-align: center;
+  padding: 1.25rem;
+  color: #777;
 `;

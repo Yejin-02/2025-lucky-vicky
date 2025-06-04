@@ -39,7 +39,7 @@ function FilterControls({
           ).map((key) => (
             <CategoryButton
               key={Category[key]}
-              isSelect={selectedCategories[Category[key]]}
+              className={selectedCategories[Category[key]] ? "selected" : ""}
               onClick={() => handleCategoryToggle(Category[key])}
             >
               {key}
@@ -97,11 +97,7 @@ const CategoryWrapper = styled.div`
   display: flex;
 `;
 
-interface CategoryButtonProps {
-  isSelect: boolean;
-}
-
-const CategoryButton = styled.button<CategoryButtonProps>`
+const CategoryButton = styled.button`
   height: 2.5rem;
   margin-right: 0.25rem;
   border-radius: 2.5rem;
@@ -110,10 +106,9 @@ const CategoryButton = styled.button<CategoryButtonProps>`
   font-size: 0.8rem;
   font-weight: 500;
 
-  color: ${(props) => (props.isSelect ? "#ffffff" : "#1f2937")};
-
-  border: 0.06rem solid ${(props) => (props.isSelect ? "#ff7b23" : "#1f2937")};
-  background-color: ${(props) => (props.isSelect ? "#ff7b23" : "#ffffff")};
+  color: #1f2937;
+  border: 0.06rem solid #1f2937;
+  background-color: #ffffff;
 
   cursor: pointer;
   transition: all 0.17s ease-in-out;
@@ -123,7 +118,17 @@ const CategoryButton = styled.button<CategoryButtonProps>`
   }
 
   &:hover {
-    border: 0.06rem solid ${(props) => (props.isSelect ? "#ff7b23" : "#1f2937")};
+    border: 0.06rem solid #1f2937;
+  }
+
+  &.selected {
+    color: #ffffff;
+    border: 0.06rem solid #ff7b23;
+    background-color: #ff7b23;
+
+    &:hover {
+      border: 0.06rem solid #ff7b23;
+    }
   }
 `;
 

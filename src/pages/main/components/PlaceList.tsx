@@ -9,15 +9,10 @@ interface PlaceListProps {
 }
 
 function PlaceList({ places }: PlaceListProps) {
-  // TODO: 로딩 중인지 체크하는 진짜 로직 추가 필요
-  const isLoading = false;
-
   return (
     <ListWrapper>
-      {isLoading ? (
-        <NoResultsMessage>로딩 중입니다</NoResultsMessage>
-      ) : places.length > 0 ? (
-        places.map((place) => <ListItem key={place.pK} place={place} />)
+      {places.length > 0 ? (
+        places.map((place) => <ListItem key={place.pk} place={place} />)
       ) : (
         <NoResultsMessage>조건에 맞는 장소가 없습니다.</NoResultsMessage>
       )}

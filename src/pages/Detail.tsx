@@ -33,13 +33,15 @@ function Detail() {
       </Header>
       {/* TODO: 뒷배경 너무 허전하니 적당한 일러스트 작업 후 absolute로 우상단에 보충 */}
       <BriefingWrapper>
-        <CardImage src={place.shop_img_S3} />
+        <CardImage src={place.shop_map_s3} />
         <BriefingText>
           <h1>{place.name}</h1>
           <HashtagWrapper>
-            {place.tag.map((tag, index) => (
-              <Hashtag key={index}>#{tag}</Hashtag>
-            ))}
+            {place.tags.length > 0
+              ? place.tags.map((tag, index) => (
+                  <Hashtag key={index}>#{tag}</Hashtag>
+                ))
+              : ""}
           </HashtagWrapper>
         </BriefingText>
       </BriefingWrapper>

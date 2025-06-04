@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"; // useState 추가
 import { useNavigate } from "react-router-dom";
-import { DaySchedule, OpeningHours, Place } from "src/@types/index";
+import { Place } from "src/@types/index";
+import { fetchShopDetail } from "src/api/client";
 import icon0Url from "src/assets/IconType0.svg";
 import icon1Url from "src/assets/IconType1.svg";
 import icon2Url from "src/assets/IconType2.svg";
@@ -9,7 +10,7 @@ import { styled } from "styled-components";
 interface Props {
   place: Place;
 }
-
+/*
 // TODO 파싱함수 수정 필요
 function parseOpeningHours(data: OpeningHours): string {
   const daysOfWeek: (keyof DaySchedule)[] = [
@@ -124,7 +125,7 @@ function parseOpeningHours(data: OpeningHours): string {
 
   return result.trim(); // Remove any trailing newline
 }
-
+*/
 function ListItem({ place }: Props) {
   const iconMap = {
     0: icon0Url,
@@ -138,14 +139,14 @@ function ListItem({ place }: Props) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
 
-  const handleClick = () => {
-    if (place && place.pK) {
-      navigate(`/place/${place.pK}`, { state: { placeData: place } });
-    } else {
+  const handleClick = async () => {
+    try {
+      const response = await fetchShopDetail(place.pk);
+      navigate(`/place/${place.pk}`, { state: response.data });
+    } catch (error) {
       console.error("Place ID is missing, cannot navigate.");
     }
   };
-
   useEffect(() => {
     const checkOverflow = () => {
       if (scrollerRef.current) {
@@ -162,12 +163,12 @@ function ListItem({ place }: Props) {
     return () => {
       window.removeEventListener("resize", checkOverflow);
     };
-  }, [place.tag]);
+  }, []);
 
   return (
     <ListCard onClick={handleClick}>
       <ImageWrapper>
-        <CardImage src={place.shop_img_S3} />
+        <CardImage src={place.shop_map_s3} />
         <IconImage src={iconSrc} alt={`Icon ${place.type}`} />
       </ImageWrapper>
       <Wrapper>
@@ -189,9 +190,11 @@ function ListItem({ place }: Props) {
         </DetailWrapper>
         <HashtagWrapper>
           <HashtagListScroller ref={scrollerRef} $isOverflowing={isOverflowing}>
-            {place.tag.map((tag, index) => (
-              <Hashtag key={index}>#{tag}</Hashtag>
-            ))}
+            {place.tags.length > 0
+              ? place.tags.map((tag, index) => (
+                  <Hashtag key={index}>#{tag}</Hashtag>
+                ))
+              : ""}
           </HashtagListScroller>
         </HashtagWrapper>
       </Wrapper>
