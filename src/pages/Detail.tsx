@@ -1,20 +1,52 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { fetchShopDetail } from "@api/client";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Place } from "src/@types/index";
 import backarrow from "src/assets/backarrow.svg";
 import { styled } from "styled-components";
 
 function Detail() {
-  const location = useLocation();
+  const { shopid } = useParams();
+  const [place, setPlace] = useState<Place | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const navigate = useNavigate(); // useNavigate 훅 사용
 
-  const place = location.state?.placeData as Place | undefined;
+  useEffect(() => {
+    const fetchDetailData = async () => {
+      setIsLoading(true);
+      setError(null);
+      console.log("isLoading = true");
+      try {
+        const data = await fetchShopDetail(Number(shopid));
+        console.log("detail data:", data);
+        const result: Place = data;
+        setPlace(result);
+      } catch (err) {
+        setError("장소 목록을 불러오는 데 실패했습니다.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchDetailData();
+  }, [shopid]);
 
   const handleGoBack = () => {
     navigate(`/`); // 이전 페이지로 이동
   };
 
+  if (isLoading) {
+    return (
+      <div>
+        <h2>로딩 중 . . .</h2>
+      </div>
+    );
+  }
+
   if (!place) {
     // placeData가 location.state를 통해 전달되지 않은 경우
+    console.log(error);
     return (
       <div>
         <h2>장소 정보를 불러올 수 없습니다.</h2>

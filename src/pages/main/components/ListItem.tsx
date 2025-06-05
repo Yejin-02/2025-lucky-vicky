@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"; // useState 추가
 import { useNavigate } from "react-router-dom";
 import { Place } from "src/@types/index";
-import { fetchShopDetail } from "src/api/client";
 import icon0Url from "src/assets/IconType0.svg";
 import icon1Url from "src/assets/IconType1.svg";
 import icon2Url from "src/assets/IconType2.svg";
@@ -141,12 +140,12 @@ function ListItem({ place }: Props) {
 
   const handleClick = async () => {
     try {
-      const response = await fetchShopDetail(place.pk);
-      navigate(`/place/${place.pk}`, { state: response.data });
+      navigate(`/place/${place.pk}`);
     } catch (error) {
       console.error("Place ID is missing, cannot navigate.");
     }
   };
+
   useEffect(() => {
     const checkOverflow = () => {
       if (scrollerRef.current) {

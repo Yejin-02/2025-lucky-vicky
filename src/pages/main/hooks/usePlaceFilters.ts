@@ -47,7 +47,7 @@ export function usePlaceFilters() {
       // API 파라미터 구성
       const params: FetchShopsParams = {
         skip: 0,
-        limit: 100,
+        limit: 10,
         shop_type: 0,
         is_active: false,
         sort_by: "name",
@@ -84,7 +84,7 @@ export function usePlaceFilters() {
     };
 
     fetchFilteredPlaces();
-  }, [selectedCategories, searchTerm, capacityFilter]);
+  }, []);
 
   return {
     filteredPlaces,

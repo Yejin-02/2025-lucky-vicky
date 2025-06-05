@@ -26,5 +26,5 @@ export const fetchShops = (params?: FetchShopsParams) => {
 };
 
 export const fetchShopDetail = (shopId: number) => {
-  return apiClient.get(`/shops/${shopId}`);
+  return apiClient.get(`/shops/${shopId}`).then((res) => res.data);
 };
