@@ -176,7 +176,15 @@ function ListItem({ place }: Props) {
           <DetailCol>
             <DetailRow>도보 {place.walk_time}분</DetailRow>
             <DetailRow>차량 {place.vehicle_time}분</DetailRow>
-            <DetailRow>주차 {place.is_parking ? "가능" : "불가"}</DetailRow>
+            {/*불가 0, 무료 1, 유료 2*/}
+            <DetailRow>
+              주차{" "}
+              {place.is_parking == 0
+                ? "불가"
+                : place.is_parking == 1
+                  ? "무료"
+                  : "유료"}
+            </DetailRow>
           </DetailCol>
           <DetailCol>
             {/*

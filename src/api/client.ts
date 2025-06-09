@@ -10,7 +10,7 @@ const apiClient = axios.create({
 export interface FetchShopsParams {
   skip?: number;
   limit?: number;
-  shop_type?: number;
+  shop_type?: string;
   min_capacity?: number;
   max_capacity?: number;
   tags?: string;

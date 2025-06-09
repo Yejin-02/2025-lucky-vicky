@@ -38,19 +38,19 @@ export function usePlaceFilters() {
       setError(null);
       console.log("isLoading = true");
 
-      // TODO: 다중 선택 구현 되면 반영
-      // 선택된 카테고리 중 true인 것만 추출
-      // const categoryList = Object.entries(selectedCategories)
-      //  .filter(([, v]) => v)
-      //  .map(([k]) => k);
+      const categoryList = Object.entries(selectedCategories)
+        .filter(([, v]) => v)
+        .map(([k]) => k);
+
+      console.log(categoryList);
 
       // API 파라미터 구성
       const params: FetchShopsParams = {
         skip: 0,
-        limit: 10,
-        shop_type: 0,
-        is_active: false,
-        sort_by: "name",
+        limit: 100,
+        shop_type: categoryList.join(","),
+        is_active: true,
+        sort_by: "walk_time",
         order: "asc",
       };
 
@@ -60,21 +60,22 @@ export function usePlaceFilters() {
         const data = await fetchShops(params);
         console.log("shops data:", data.shops);
 
-        const result: Place[] = data.shops;
-        /* 
+        let result: Place[] = data.shops;
+
         // 검색어 필터링
         if (searchTerm) {
           result = result.filter((place: Place) =>
             place.name.toLowerCase().includes(searchTerm.toLowerCase()),
           );
         }
+
         // 인원 필터링
         if (capacityFilter !== null) {
           result = result.filter(
             (place: Place) =>
               place.max_cap !== undefined && place.max_cap >= capacityFilter,
           );
-        }*/
+        }
         setFilteredPlaces(result);
       } catch (err) {
         setError("장소 목록을 불러오는 데 실패했습니다.");
@@ -84,7 +85,7 @@ export function usePlaceFilters() {
     };
 
     fetchFilteredPlaces();
-  }, []);
+  }, [capacityFilter, searchTerm, selectedCategories]);
 
   return {
     filteredPlaces,
