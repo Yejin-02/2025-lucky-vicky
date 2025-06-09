@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logoUrl from "src/assets/eatGlogo.svg";
 import styled from "styled-components";
 
 import CapacityModal from "../main/components/CapacityModal";
@@ -35,7 +36,7 @@ function Main() {
   return (
     <Wrapper>
       <Header>
-        <span onClick={handleHeaderClick}>EatG</span>
+        <img src={logoUrl} onClick={handleHeaderClick} alt={"EatG"} />
       </Header>
       <FilterControls
         searchTerm={searchTerm}
@@ -79,12 +80,12 @@ const Wrapper = styled.div`
 const Header = styled.div`
   background-color: #ff7b23;
   color: white;
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 3rem;
-  height: 3rem;
-  > span {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  > img {
     cursor: pointer;
+    height: 2rem;
   }
 `;
 
