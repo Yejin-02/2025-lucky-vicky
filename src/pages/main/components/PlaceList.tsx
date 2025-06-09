@@ -10,13 +10,18 @@ interface PlaceListProps {
 
 function PlaceList({ places }: PlaceListProps) {
   return (
-    <ListWrapper>
-      {places.length > 0 ? (
-        places.map((place) => <ListItem key={place.pk} place={place} />)
-      ) : (
-        <NoResultsMessage>조건에 맞는 장소가 없습니다.</NoResultsMessage>
-      )}
-    </ListWrapper>
+    <>
+      <ListWrapper>
+        <ListInfo>
+          {places.length > 0 ? `검색 결과 ${places.length}개` : null}
+        </ListInfo>
+        {places.length > 0 ? (
+          places.map((place) => <ListItem key={place.pk} place={place} />)
+        ) : (
+          <NoResultsMessage>조건에 맞는 장소가 없습니다.</NoResultsMessage>
+        )}
+      </ListWrapper>
+    </>
   );
 }
 
@@ -35,6 +40,12 @@ const ListWrapper = styled.ul`
   overscroll-behavior-y: contain;
   flex-grow: 1;
   min-height: 0;
+`;
+
+const ListInfo = styled.div`
+  text-align: left;
+  padding: 0.2rem;
+  color: #777;
 `;
 
 const NoResultsMessage = styled.div`
