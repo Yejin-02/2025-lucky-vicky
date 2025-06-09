@@ -51,9 +51,9 @@ const HashTag = styled.div`
   background-color: #ffd0b5;
   color: #ff7b23;
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 2.2rem;
-  padding: 0 0.5rem;
+  padding: 0 0.4rem;
   border-radius: 0.3rem;
 `;
 
