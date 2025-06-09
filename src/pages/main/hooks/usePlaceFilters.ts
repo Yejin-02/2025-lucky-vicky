@@ -49,7 +49,6 @@ export function usePlaceFilters() {
         skip: 0,
         limit: 100,
         shop_type: categoryList.join(","),
-        is_active: true,
         sort_by: "walk_time",
         order: "asc",
       };

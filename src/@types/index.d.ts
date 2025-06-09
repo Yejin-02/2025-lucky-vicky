@@ -1,11 +1,11 @@
 export interface DaySchedule {
-  mon: string | null;
-  tue: string | null;
-  wed: string | null;
-  thu: string | null;
-  fri: string | null;
-  sat: string | null;
-  sun: string | null;
+  Mon: string | null;
+  Tue: string | null;
+  Wed: string | null;
+  Thu: string | null;
+  Fri: string | null;
+  Sat: string | null;
+  Sun: string | null;
 }
 
 export interface OpeningHours {

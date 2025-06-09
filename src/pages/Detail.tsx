@@ -56,6 +56,28 @@ function Detail() {
     );
   }
 
+  const dayKorean = ["월", "화", "수", "목", "금", "토", "일"];
+  const hoursList = Object.entries({
+    mon: place.opening_info.opening_hours.Mon,
+    tue: place.opening_info.opening_hours.Tue,
+    wed: place.opening_info.opening_hours.Wed,
+    thu: place.opening_info.opening_hours.Thu,
+    fri: place.opening_info.opening_hours.Fri,
+    sat: place.opening_info.opening_hours.Sat,
+    sun: place.opening_info.opening_hours.Sun,
+  }).map(([, hours], index) => {
+    if (hours) {
+      return {
+        day: dayKorean[index],
+        hours: hours,
+      };
+    } else {
+      return { day: dayKorean[index], hours: "휴무" };
+    }
+  });
+
+  console.log(hoursList);
+
   return (
     <Wrapper>
       <Header>
@@ -82,12 +104,31 @@ function Detail() {
         <DetailWrapper>
           <Section>
             <SectionTitle>영업 정보</SectionTitle>
-            {/* TODO: API 나오면 데이터 포맷 맞춰서 이 부분 채우기 */}
-            <SectionItem>
-              <Label>
-                휴무일 <Value>없음</Value>
-              </Label>
-            </SectionItem>
+            {hoursList.map((item, index) => (
+              <SectionItem key={index}>
+                <Label>
+                  {item.day} <Value>{item.hours}</Value>
+                </Label>
+              </SectionItem>
+            ))}
+            {place.opening_info.last_order ? (
+              <SectionItem>
+                <Label>
+                  라스트오더 <Value>{place.opening_info.last_order}</Value>
+                </Label>
+              </SectionItem>
+            ) : (
+              ""
+            )}
+            {place.opening_info.break_time ? (
+              <SectionItem>
+                <Label>
+                  브레이크타임 <Value>{place.opening_info.break_time}</Value>
+                </Label>
+              </SectionItem>
+            ) : (
+              ""
+            )}
           </Section>
           <Section>
             <SectionTitle>수용 정보</SectionTitle>
@@ -112,7 +153,17 @@ function Detail() {
           */}
           </Section>
           <Section>
-            <SectionTitle>학교로부터 거리</SectionTitle>
+            <SectionTitle>학교로부터</SectionTitle>
+            <SectionItem>
+              <Label>
+                거리 <Value>{place.dist}m</Value>
+              </Label>
+            </SectionItem>
+            <SectionItem>
+              <Label>
+                도보 <Value>{place.walk_time}분</Value>
+              </Label>
+            </SectionItem>
             <SectionItem>
               <Label>
                 대중교통 <Value>{place.pubtrans_time}분</Value>
@@ -125,7 +176,14 @@ function Detail() {
             </SectionItem>
             <SectionItem>
               <Label>
-                도보 <Value>{place.walk_time}분</Value>
+                주차{" "}
+                <Value>
+                  {place.is_parking == 0
+                    ? "불가"
+                    : place.is_parking == 1
+                      ? "무료"
+                      : "유료"}
+                </Value>
               </Label>
             </SectionItem>
             <LinkButton href={place.kakao_link} target="_blank">
