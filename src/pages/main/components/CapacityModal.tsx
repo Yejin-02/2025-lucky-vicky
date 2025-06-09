@@ -75,6 +75,7 @@ const ModalContent = styled.div`
   > h3 {
     margin: 0;
     margin-top: 0.5rem;
+    color: #252525;
   }
 `;
 
@@ -89,7 +90,7 @@ const ModalInput = styled.input`
   background-color: white;
 
   font-size: 1rem;
-
+  color: #252525;
   &:focus {
     outline: none;
   }
@@ -118,5 +119,6 @@ const ModalButton = styled.button`
   }
   &:last-child {
     background-color: #e9e9e9;
+    color: #252525;
   }
 `;

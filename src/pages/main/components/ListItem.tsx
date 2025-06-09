@@ -164,6 +164,7 @@ const PlaceName = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #252525;
 `;
 
 const DetailWrapper = styled.div`

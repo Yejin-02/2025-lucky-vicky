@@ -75,7 +75,7 @@ const Search = styled.input`
 
   border: 0.06rem solid black;
   background-color: white;
-
+  color: #252525;
   &:focus {
     outline: none;
   }
@@ -152,7 +152,7 @@ const Button = styled.button`
   align-items: center;
 
   transition: all 0.17s ease-in-out;
-
+  color: #252525;
   &:focus {
     outline: none;
     border: 0.06rem solid #1f2937;

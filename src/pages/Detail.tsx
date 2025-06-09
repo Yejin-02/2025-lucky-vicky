@@ -249,6 +249,7 @@ const BriefingText = styled.div`
     line-height: 1.5rem;
     margin: 0;
     text-align: left;
+    color: #252525;
   }
 `;
 
@@ -333,10 +334,12 @@ const SectionItem = styled.div`
 const Label = styled.span`
   font-weight: 600;
   line-height: 2rem;
+  color: #252525;
 `;
 
 const Value = styled.span`
   font-weight: 400;
+  color: #252525;
 `;
 
 const LinkButton = styled.a`
