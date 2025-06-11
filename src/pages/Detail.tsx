@@ -166,11 +166,6 @@ function Detail() {
             </SectionItem>
             <SectionItem>
               <Label>
-                대중교통 <Value>{place.pubtrans_time}분</Value>
-              </Label>
-            </SectionItem>
-            <SectionItem>
-              <Label>
                 차량 <Value>{place.vehicle_time}분</Value>
               </Label>
             </SectionItem>
