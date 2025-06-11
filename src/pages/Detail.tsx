@@ -142,14 +142,15 @@ function Detail() {
                 테이블 당 최대 인원 <Value>{place.table_cap}명</Value>
               </Label>
             </SectionItem>
-            {/* 
-             TODO 나중에 구현
-          <SectionItem>
-            <Label>내부 이미지</Label>
-            <ImageScroller>
-              <StyledImage />
-            </ImageScroller>
-          </SectionItem>
+            {/*
+            // TODO: DB에 이미지 자료 준비한 후후
+            <SectionItem>
+              <Label>내부 이미지</Label>
+              <ImageScroller>
+                <StyledImage src={place.shop_map_s3} />
+                <StyledImage src={place.table_map_s3} />
+              </ImageScroller>
+            </SectionItem>
           */}
           </Section>
           <Section>
@@ -355,12 +356,22 @@ const LinkButton = styled.a`
   }
 `;
 
-/* 
-          *** 나중에 구현
+{
+  /*
+            // TODO: DB에 이미지 자료 준비한 후후
 const ImageScroller = styled.div`
   display: flex;
-  overflow: scroll;
+  overflow-x: scroll;
+  gap: 8px;
+  padding: 8px 0;
 `;
 
-const StyledImage = styled.img``;
+const StyledImage = styled.img`
+  height: 120px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex: 0 0 auto;
+`;
+
 */
+}
