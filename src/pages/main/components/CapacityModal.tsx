@@ -9,6 +9,7 @@ interface CapacityModalProps {
 
 function CapacityModal({ isOpen, onClose, onApply }: CapacityModalProps) {
   const [inputValue, setInputValue] = useState("");
+  const [showError, setShowError] = useState(false);
 
   if (!isOpen) {
     return null;
@@ -26,19 +27,44 @@ function CapacityModal({ isOpen, onClose, onApply }: CapacityModalProps) {
     onClose();
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    // 숫자만 허용 (정규식: 0-9만 허용)
+    if (/^[0-9]*$/.test(value)) {
+      setShowError(false); // 유효하면 에러 숨김
+    } else {
+      setShowError(true); // 유효하지 않으면 에러 표시
+    }
+    setInputValue(value);
+  };
+
   return (
     <ModalOverlay onClick={handleClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <h3>인원 수 필터</h3>
         <ModalInput
-          type="number"
+          type="text"
+          inputMode="numeric"
           placeholder="인원 수를 입력하세요 (예: 5)"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={handleInputChange}
           min="1"
         />
+        {showError && (
+          <span
+            style={{ color: "red", fontSize: "0.9rem", marginTop: "0.1rem" }}
+          >
+            숫자만 입력할 수 있습니다.
+          </span>
+        )}
         <ModalButtonContainer>
-          <ModalButton onClick={handleApply}>적용</ModalButton>
+          <ModalButton
+            onClick={handleApply}
+            disabled={showError || inputValue === ""}
+          >
+            적용
+          </ModalButton>
           <ModalButton onClick={handleClose}>닫기</ModalButton>
         </ModalButtonContainer>
       </ModalContent>
@@ -117,8 +143,15 @@ const ModalButton = styled.button`
     background-color: #ff7b23;
     color: white;
   }
+
   &:last-child {
     background-color: #e9e9e9;
     color: #252525;
+  }
+
+  &:disabled {
+    color: #f0f0f0;
+    background-color: #ffc198;
+    cursor: not-allowed;
   }
 `;
